@@ -1,4 +1,3 @@
-
 # Wagtail CRX Docker Setup
 
 This repository provides a setup for using Wagtail CRX with Docker under the "Image as Environment" model. The setup allows you to run two separate Wagtail instances with a single PostgreSQL database container and an Nginx proxy container.
@@ -19,11 +18,30 @@ The goal of this project is to provide a flexible and scalable development envir
 Clone the `wagtail-starter` repository:
 
 ```sh
-git clone https://github.com/yourusername/wagtail-starter.git
+git clone https://github.com/bastelix/wagtail-starter.git
 cd wagtail-starter
 ```
 
-### Step 2: Create the `.env` File
+### Step 2: Create the Project Directories and Copy Files
+
+Create the `project1` and `project2` directories and copy the necessary project files from the root directory:
+
+```sh
+mkdir project1 project2
+cp Dockerfile project1/
+cp docker-entrypoint.sh project1/
+cp Dockerfile project2/
+cp docker-entrypoint.sh project2/
+```
+
+Create the `media` and `static` directories within each project directory:
+
+```sh
+mkdir -p project1/media project1/static
+mkdir -p project2/media project2/static
+```
+
+### Step 3: Create the `.env` File
 
 Copy the `sample.env` file to `.env` and update it with your configuration values:
 
@@ -41,8 +59,8 @@ POSTGRES_PASSWORD=your_postgres_password
 # Wagtail 1 configuration
 WAGTAIL_VIRTUAL_HOST_1=yourdomain1.com
 WAGTAIL_LETSENCRYPT_EMAIL_1=youremail1@example.com
-WAGTAIL_MEDIA_PATH_1=/path/to/wagtail1/media
-WAGTAIL_STATIC_PATH_1=/path/to/wagtail1/static
+WAGTAIL_MEDIA_PATH_1=./project1/media
+WAGTAIL_STATIC_PATH_1=./project1/static
 WAGTAIL_DB_1=wagtaildb1
 WAGTAIL_SITENAME_1="My Company Inc."
 WAGTAIL_DOMAIN_1="www.example.com"
@@ -50,8 +68,8 @@ WAGTAIL_DOMAIN_1="www.example.com"
 # Wagtail 2 configuration
 WAGTAIL_VIRTUAL_HOST_2=yourdomain2.com
 WAGTAIL_LETSENCRYPT_EMAIL_2=youremail2@example.com
-WAGTAIL_MEDIA_PATH_2=/path/to/wagtail2/media
-WAGTAIL_STATIC_PATH_2=/path/to/wagtail2/static
+WAGTAIL_MEDIA_PATH_2=./project2/media
+WAGTAIL_STATIC_PATH_2=./project2/static
 WAGTAIL_DB_2=wagtaildb2
 WAGTAIL_SITENAME_2="Another Company LLC"
 WAGTAIL_DOMAIN_2="www.anotherexample.com"
@@ -59,7 +77,7 @@ WAGTAIL_DOMAIN_2="www.anotherexample.com"
 
 Replace the placeholders with your actual configuration values.
 
-### Step 3: Build the Docker Images
+### Step 4: Build the Docker Images
 
 Navigate to the project's root directory and build the Docker images for both Wagtail instances:
 
@@ -68,7 +86,7 @@ docker-compose build wagtail1
 docker-compose build wagtail2
 ```
 
-### Step 4: Start the Containers
+### Step 5: Start the Containers
 
 Start all containers with Docker Compose:
 
@@ -108,10 +126,14 @@ wagtail-starter/
 ├── project1/
 │   ├── Dockerfile
 │   ├── docker-entrypoint.sh
+│   ├── media/
+│   ├── static/
 │   └── ... (other project files)
 ├── project2/
 │   ├── Dockerfile
 │   ├── docker-entrypoint.sh
+│   ├── media/
+│   ├── static/
 │   └── ... (other project files)
 ├── sample.env
 ├── .env
@@ -129,6 +151,5 @@ wagtail-starter/
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 
 
