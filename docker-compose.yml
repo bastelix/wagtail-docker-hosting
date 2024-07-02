@@ -1,0 +1,82 @@
+version: '3.1'
+
+services:
+
+  nginx-proxy:
+    container_name: nginx-proxy
+    image: jwilder/nginx-proxy:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx/conf.d/my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro
+      - /etc/nginx/certs
+    environment:
+      DEFAULT_EMAIL: ${WAGTAIL_LETSENCRYPT_EMAIL_1}
+    restart: unless-stopped
+
+  wagtail1:
+    container_name: wagtail01
+    build:
+      context: ./project1
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_DB: ${WAGTAIL_DB_1}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      VIRTUAL_HOST: ${WAGTAIL_VIRTUAL_HOST_1}
+      VIRTUAL_PORT: 8000
+      LETSENCRYPT_HOST: ${WAGTAIL_VIRTUAL_HOST_1}
+      LETSENCRYPT_EMAIL: ${WAGTAIL_LETSENCRYPT_EMAIL_1}
+      WAGTAIL_SITENAME: ${WAGTAIL_SITENAME_1}
+      WAGTAIL_DOMAIN: ${WAGTAIL_DOMAIN_1}
+    volumes:
+      - ${WAGTAIL_MEDIA_PATH_1}:/app/media
+      - ${WAGTAIL_STATIC_PATH_1}:/app/static
+    expose:
+      - "8000"
+    networks:
+      - backend
+
+  wagtail2:
+    container_name: wagtail02
+    build:
+      context: ./project2
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_DB: ${WAGTAIL_DB_2}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      VIRTUAL_HOST: ${WAGTAIL_VIRTUAL_HOST_2}
+      VIRTUAL_PORT: 8000
+      LETSENCRYPT_HOST: ${WAGTAIL_VIRTUAL_HOST_2}
+      LETSENCRYPT_EMAIL: ${WAGTAIL_LETSENCRYPT_EMAIL_2}
+      WAGTAIL_SITENAME: ${WAGTAIL_SITENAME_2}
+      WAGTAIL_DOMAIN: ${WAGTAIL_DOMAIN_2}
+    volumes:
+      - ${WAGTAIL_MEDIA_PATH_2}:/app/media
+      - ${WAGTAIL_STATIC_PATH_2}:/app/static
+    expose:
+      - "8000"
+    networks:
+      - backend
+
+  db:
+    container_name: postgres
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - backend
+    restart: unless-stopped
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  postgres_data:
