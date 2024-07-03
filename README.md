@@ -11,6 +11,8 @@ The goal of this project is to provide a flexible and scalable development envir
 - Docker
 - Docker Compose
 
+If Docker and Docker Compose are not installed on your system, you can use the provided installation script. For instructions, refer to the [Docker and Docker Compose Installation Guide](README_docker_install.md).
+
 ## Setup
 
 ### Step 1: Clone the Repository
