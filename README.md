@@ -124,7 +124,7 @@ docker-compose down
 The repository contains the following files and directories:
 
 ```
-wagtail-starter/
+wagtail-docker-hosting/
 ├── project1/
 │   ├── Dockerfile
 │   ├── docker-entrypoint.sh
@@ -137,6 +137,7 @@ wagtail-starter/
 │   ├── media/
 │   ├── static/
 │   └── ... (other project files)
+├── install_docker_compose.sh
 ├── sample.env
 ├── .env
 ├── docker-compose.yml
@@ -148,6 +149,7 @@ wagtail-starter/
 - **sample.env**: Sample environment variables file for project configuration.
 - **.env**: Environment variables for project configuration. (use `sample.env` as template)
 - **docker-compose.yml**: Docker Compose file to start the containers.
+- **install_docker_compose.sh**: Script to install Docker and Docker Compose.
 - **README.md**: This file.
 
 ## License
