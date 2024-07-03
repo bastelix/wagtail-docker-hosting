@@ -4,7 +4,7 @@ This repository provides a setup for using Wagtail CRX with Docker under the "Im
 
 ## Project Purpose
 
-The goal of this project is to provide a flexible and scalable development environment for Wagtail CRX. By using Docker containers, dependency on specific system configurations is reduced, and a consistent development environment is created. This setup allows you to quickly start developing and deploying Wagtail websites.
+The goal of this project is to provide a flexible and scalable development environment for Wagtail CRX. By using Docker containers, dependency on specific system configurations is reduced, and a consistent development environment is created. This setup allows you to quickly start developing and deploying Wagtail websites. Additionally, since the projects are Docker-based, they can be easily transported and deployed to other servers, ensuring a seamless transition from development to production.
 
 ## Prerequisites
 
