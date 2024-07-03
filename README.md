@@ -15,10 +15,10 @@ The goal of this project is to provide a flexible and scalable development envir
 
 ### Step 1: Clone the Repository
 
-Clone the `wagtail-starter` repository:
+Clone the `wagtail-docker-hosting` repository:
 
 ```sh
-git clone https://github.com/bastelix/wagtail-starter.git
+git clone https://github.com/bastelix/wagtail-docker-hosting.git
 cd wagtail-starter
 ```
 
