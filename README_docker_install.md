@@ -15,7 +15,7 @@ This script installs the latest versions of Docker and Docker Compose on an Ubun
 
     ```sh
     git clone https://github.com/bastelix/wagtail-docker-hosting.git
-    cd wagtail-starter
+    cd wagtail-docker-hosting
     ```
 
 2. **Make the Script Executable**
