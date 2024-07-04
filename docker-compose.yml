@@ -10,8 +10,6 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./nginx/conf.d/my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro
-      - /etc/nginx/certs
     environment:
       DEFAULT_EMAIL: ${WAGTAIL_LETSENCRYPT_EMAIL_1}
     restart: unless-stopped
@@ -26,7 +24,6 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       VIRTUAL_HOST: ${WAGTAIL_VIRTUAL_HOST_1}
-      VIRTUAL_PORT: 8000
       LETSENCRYPT_HOST: ${WAGTAIL_VIRTUAL_HOST_1}
       LETSENCRYPT_EMAIL: ${WAGTAIL_LETSENCRYPT_EMAIL_1}
       WAGTAIL_SITENAME: ${WAGTAIL_SITENAME_1}
@@ -49,7 +46,6 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       VIRTUAL_HOST: ${WAGTAIL_VIRTUAL_HOST_2}
-      VIRTUAL_PORT: 8000
       LETSENCRYPT_HOST: ${WAGTAIL_VIRTUAL_HOST_2}
       LETSENCRYPT_EMAIL: ${WAGTAIL_LETSENCRYPT_EMAIL_2}
       WAGTAIL_SITENAME: ${WAGTAIL_SITENAME_2}
