@@ -21,7 +21,7 @@ Clone the `wagtail-docker-hosting` repository:
 
 ```sh
 git clone https://github.com/bastelix/wagtail-docker-hosting.git
-cd wagtail-starter
+cd wagtail-docker-hosting
 ```
 
 ### Step 2: Create the Project Directories and Copy Files
